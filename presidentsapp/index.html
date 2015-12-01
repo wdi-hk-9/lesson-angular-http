@@ -13,12 +13,6 @@
     <section ng-controller="PresidentsController">
       <h1>The Presidents of the United States of America</h1>
 
-      <ul id="presidents">
-        <li ng-repeat="president in all">
-          <strong>{{president.name}}</strong> <em>({{president.start}} - {{president.end}})</em>
-        </li>
-      </ul>
-
       <form class="add-president" ng-submit='addPresident()'>
         <div>
           <label for="new-president-name">President's Name</label>
@@ -39,6 +33,23 @@
           <input type="submit">
         </div>
       </form>
+
+      <ul id="presidents">
+        <li ng-repeat="president in all">
+          <strong>{{president.name}}</strong> <em>({{president.start}} - {{president.end}})</em>
+          <button ng-click="deletePresident(president._id)">Delete</button>
+          <button ng-click="showPresident(president)">Edit</button>
+        </li>
+      </ul>
+
+      <div>
+        <form ng-submit="updatePresident()">
+          <h1>{{ editPresident.name }}</h1>
+          <input type="text" ng-model="editPresident.start">
+          <input type="text" ng-model="editPresident.end">
+          <button type="submit">Update</button>
+        </form>
+      </div>
 
     </section>
 

@@ -3,7 +3,14 @@ angular.module('ThePresidentsApp', [])
   $scope.all = [];
 
   $scope.newPresident = {};
+  $scope.editPresident = {};
   $scope.addPresident = addPresident;
+  $scope.deletePresident = deletePresident;
+  $scope.showPresident = showPresident;
+
+  function showPresident(president) {
+    $scope.editPresident = president;
+  }
 
   getPresidents();
   function getPresidents(){
@@ -21,5 +28,13 @@ angular.module('ThePresidentsApp', [])
         getPresidents();
       });
     $scope.newPresident = {};
+  }
+
+  function deletePresident(id){
+    $http
+      .delete('http://localhost:3000/presidents/' + id)
+      .success(function(){
+        getPresidents();
+      });
   }
 }]);
